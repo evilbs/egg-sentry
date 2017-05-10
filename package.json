@@ -1,0 +1,17 @@
+{
+  "name": "egg-sentry",
+  "version": "1.0.0",
+  "description": "a plugin of sentry for egg.use to upload egg error log to egg platform.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eggPlugin": {
+    "name": "eggsentry"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "raven": "^1.1.3"
+  }
+}
