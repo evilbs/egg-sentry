@@ -15,8 +15,15 @@ Raven.getContext = function () {
   return false;
 };
 
+Raven.setContext = function (ctx) {
+  if (domain.active) {
+    domain.active.sentryContext = ctx;
+  }
+
+  return this;
+};
+
 Raven.captureBreadcrumb = function (breadcrumb) {
-  // Avoid capturing global-scoped breadcrumbs before instrumentation finishes
   if (!this.installed) return;
   const currCtx = this.getContext();
   if (!currCtx)

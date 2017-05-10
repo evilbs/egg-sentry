@@ -9,7 +9,7 @@ const eggLogLevelMapping = {
   INFO: 'info',
   WARN: 'warning',
   ERROR: 'error'
-}; 
+};
 
 module.exports = app => {
   const config = app.config.sentry;
@@ -27,7 +27,7 @@ module.exports = app => {
   if (config.enable !== true) {
     return;
   }
-
+  
   const options = Object.assign({}, config);
   // 不允许用户自定义 tags
   options.tags = {
@@ -48,12 +48,13 @@ module.exports = app => {
       }
 
       if (level === 'ERROR') {
-        Raven.captureException(err, {
+        const kwargs = {
           tags: {
             ErrorName: err.name,
             ErrorCode: err.code,
           },
-        });
+        };
+        Raven.captureException(err, kwargs);
       } else {
         const sentryLevel = eggLogLevelMapping[level] || 'info';
         Raven.captureBreadcrumb({ message: err, level: sentryLevel });
